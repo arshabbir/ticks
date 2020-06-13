@@ -43,9 +43,10 @@ func print() {
 
 func tick() {
 	for {
+		time.Sleep(time.Second)
 
 		mut.Lock()
-		time.Sleep(time.Second)
+
 		gque <- smsg
 		mut.Unlock()
 
@@ -100,6 +101,8 @@ func input() {
 			fmt.Println("Syntax error :  s/m/h newstring")
 		}
 
+		mut.Lock()
+
 		if cmd[0] == "s" {
 			smsg = cmd[1]
 		}
@@ -111,6 +114,6 @@ func input() {
 			hmsg = cmd[1]
 
 		}
-
+		mut.Unlock()
 	}
 }
